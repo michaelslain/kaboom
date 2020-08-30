@@ -16,7 +16,7 @@ app
     .get('/raid/:gamePin', (req, res) => {
         res.send({ status: 200 })
 
-        const botAmount = 100
+        const botAmount = 10
         const workerPath = './Bot.js'
         const { gamePin } = req.params
 
