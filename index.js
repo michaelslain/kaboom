@@ -45,5 +45,5 @@ app
     // start
     .listen(port, () => {
         console.log(`Server be startin on port ${port}`)
-        setInterval(() => fetch(), 600000)
+        setInterval(() => fetch('https://kahoot-kaboom.herokuapp.com/'), 600000)
     })
