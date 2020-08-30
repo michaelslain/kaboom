@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { Worker } from 'worker_threads'
+import fetch from 'node-fetch'
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -9,6 +10,9 @@ app
     // middlewares
     .use(cors())
     // routes
+    .get('/', (req, res) => {
+        res.send('Welcome')
+    })
     .get('/raid/:gamePin', (req, res) => {
         res.send({ status: 200 })
 
@@ -39,4 +43,7 @@ app
         }
     })
     // start
-    .listen(port, () => console.log(`Server be startin on port ${port}`))
+    .listen(port, () => {
+        console.log(`Server be startin on port ${port}`)
+        setInterval(() => fetch(), 600000)
+    })
