@@ -27,6 +27,9 @@ body {
 body .title {
   color: white;
   font-size: 80px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 100px;
 }
 
 body .input-container {
@@ -37,6 +40,7 @@ body .input-container {
       -ms-flex-align: center;
           align-items: center;
   gap: 30px;
+  margin-bottom: 100px;
 }
 
 body .input-container .pin {
