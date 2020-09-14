@@ -127,7 +127,11 @@ let names = `Kahoot me
 names = names.split('\n')
 names = names.map(name => name.trim())
 
-const randomNumber = Math.floor(Math.random() * names.length)
-const randomName = names[randomNumber]
+class Name {
+    constructor() {
+        const randomNumber = Math.floor(Math.random() * names.length)
+        this.value = names[randomNumber]
+    }
+}
 
-export default randomName
+export default Name

@@ -13,33 +13,28 @@ app
     .get('/', (req, res) => {
         res.send('Welcome')
     })
-    .get('/raid/:gamePin', (req, res) => {
+    .get('/raid/:gamePin/:amount', (req, res) => {
         res.send({ status: 200 })
 
-        const botAmount = 10
-        const workerPath = './Bot.js'
-        const { gamePin } = req.params
+        try {
+            const { gamePin, amount = 10 } = req.params
 
-        for (let i = 0; i < botAmount; i++) {
-            try {
-                const thread = new Worker(workerPath)
+            const workerPath = './Bot.js'
+            const thread = new Worker(workerPath)
 
-                const timeout = setTimeout(
-                    () => thread.terminate(),
-                    1800000 /* 30min */
-                )
+            // 30min timeout
+            const timeout = setTimeout(() => thread.terminate(), 1800000)
 
-                thread.postMessage({ gamePin })
+            thread.postMessage({ gamePin, amount })
 
-                thread.once('message', () => thread.terminate())
-                thread.on('error', err => console.error(err))
-                thread.on('exit', () => {
-                    console.log('Thread is closed')
-                    clearTimeout(timeout)
-                })
-            } catch (err) {
-                console.error(err)
-            }
+            thread.once('message', () => thread.terminate())
+            thread.on('error', err => console.error(err))
+            thread.on('exit', () => {
+                console.log('Thread is closed')
+                clearTimeout(timeout)
+            })
+        } catch (err) {
+            console.error(err)
         }
     })
     // start
