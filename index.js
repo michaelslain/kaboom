@@ -17,7 +17,9 @@ app
         res.send({ status: 200 })
 
         try {
-            const { gamePin, amount = 10 } = req.params
+            let { gamePin, amount = 10 } = req.params
+            gamePin = Number(gamePin)
+            amount = Number(amount)
 
             const workerPath = './Bot.js'
             const thread = new Worker(workerPath)
